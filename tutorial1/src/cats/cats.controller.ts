@@ -5,8 +5,9 @@ import { CreateCatDto } from './dto';
 @Controller('cats')
 export class CatsController {
   @Post()
-  create(@Body() createCatDto: CreateCatDto) {
-    return 'This action adds a new cat';
+  create(@Body() createCatDto: CreateCatDto, @Res() res: Response) {
+    // return 'This action adds a new cat';
+    res.status(HttpStatus.CREATED).json({ name: createCatDto.name });
   }
 
   // @Get()
@@ -17,7 +18,7 @@ export class CatsController {
   @Get(':id')
   findOne(@Param('id') id: string, @Res() res: Response) {
     // return `This action returns a #${id} cat`;
-    res.status(HttpStatus.CREATED).send({ id });
+    res.status(HttpStatus.OK).json({ id });
   }
 
   // @Put(':id')
