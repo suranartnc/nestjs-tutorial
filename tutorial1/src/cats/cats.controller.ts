@@ -1,4 +1,5 @@
-import { Controller, Get, Query, Post, Body, Put, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Query, Post, Body, Put, Param, Delete, Res, HttpStatus } from '@nestjs/common';
+import { Response } from 'express';
 import { CreateCatDto } from './dto';
 
 @Controller('cats')
@@ -14,8 +15,9 @@ export class CatsController {
   // }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return `This action returns a #${id} cat`;
+  findOne(@Param('id') id: string, @Res() res: Response) {
+    // return `This action returns a #${id} cat`;
+    res.status(HttpStatus.CREATED).send({ id });
   }
 
   // @Put(':id')
