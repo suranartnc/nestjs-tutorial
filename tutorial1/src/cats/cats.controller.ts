@@ -1,33 +1,21 @@
 import { Controller, Get, Query, Post, Body, Put, Param, Delete, Res, HttpStatus } from '@nestjs/common';
 import { Response } from 'express';
+
 import { CreateCatDto } from './dto';
+import { CatsService } from './cats.service'
+import { Cat } from './interfaces/cat.interface'
 
 @Controller('cats')
 export class CatsController {
+  constructor(private catsService: CatsService) {}
+
   @Post()
-  create(@Body() createCatDto: CreateCatDto, @Res() res: Response) {
-    // return 'This action adds a new cat';
-    res.status(HttpStatus.CREATED).json({ name: createCatDto.name });
+  async create(@Body() createCatDto: CreateCatDto, @Res() res: Response) {
+    this.catsService.create(createCatDto);
   }
 
-  // @Get()
-  // findAll(@Query() query: ListAllEntities) {
-  //   return `This action returns all cats (limit: ${query.limit} items)`;
-  // }
-
-  @Get(':id')
-  findOne(@Param('id') id: string, @Res() res: Response) {
-    // return `This action returns a #${id} cat`;
-    res.status(HttpStatus.OK).json({ id });
-  }
-
-  // @Put(':id')
-  // update(@Param('id') id: string, @Body() updateCatDto: UpdateCatDto) {
-  //   return `This action updates a #${id} cat`;
-  // }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return `This action removes a #${id} cat`;
-  }
+  @Get()
+  async findAll(): Promise<Cat[]> {
+    return this.catsService.findAll();
+  } 
 }
