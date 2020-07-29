@@ -17,7 +17,9 @@ export class CatsController {
 
   @Get()
   async findAll(): Promise<Cat[]> {
-    console.log('configService', this.configService.get('port'))
+    console.log('global config', this.configService.get('global'))
+    console.log('database config', this.configService.get('database'))
+
     return this.catsService.findAll();
   } 
 }
