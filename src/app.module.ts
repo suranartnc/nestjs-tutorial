@@ -12,26 +12,26 @@ import { CatsModule } from './cats/cats.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({  
+    ConfigModule.forRoot({
       load: [globalConfig, databaseConfig, cacheConfig],
       // isGlobal: true,
-    }), 
+    }),
     CacheModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
         ttl: configService.get('cache.medium'),
       }),
-      inject: [ConfigService]
+      inject: [ConfigService],
     }),
-    CatsModule
+    CatsModule,
   ],
   controllers: [AppController],
   providers: [
-    AppService, 
+    AppService,
     {
       provide: APP_INTERCEPTOR,
       useClass: CacheInterceptor,
-    }
+    },
   ],
 })
 export class AppModule {}

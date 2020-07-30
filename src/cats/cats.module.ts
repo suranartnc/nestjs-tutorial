@@ -6,13 +6,13 @@ import { CatsService } from './cats.service';
 
 @Module({
   imports: [
-    ConfigModule, 
+    ConfigModule,
     HttpModule.register({
       timeout: 5000,
     }),
   ],
   controllers: [CatsController],
   providers: [CatsService],
-  exports: [CatsService]
+  exports: [CatsService],
 })
 export class CatsModule {}
