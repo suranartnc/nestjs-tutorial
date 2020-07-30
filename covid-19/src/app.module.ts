@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import globalConfig from './config/global.config';
 import databaseConfig from './config/database.config';
+import cacheConfig from './config/cache.config';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -11,7 +12,7 @@ import { CatsModule } from './cats/cats.module';
 @Module({
   imports: [
     ConfigModule.forRoot({  
-      load: [globalConfig, databaseConfig],
+      load: [globalConfig, databaseConfig, cacheConfig],
       // isGlobal: true,
     }), 
     CatsModule

@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Post, Body, Put, Param, Delete, Res, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Query, Post, Body, Put, Param, Delete, Res, HttpStatus, UseInterceptors, CacheInterceptor } from '@nestjs/common';
 import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 
@@ -7,6 +7,7 @@ import { Cat } from './interfaces/cat.interface'
 import { CatsService } from './cats.service'
 
 @Controller('cats')
+@UseInterceptors(CacheInterceptor)
 export class CatsController {
   constructor(private catsService: CatsService, private configService: ConfigService) {}
 
