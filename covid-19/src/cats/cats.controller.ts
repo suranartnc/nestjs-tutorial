@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Post, Body, Put, Param, Delete, Res } from '@nestjs/common';
+import { Controller, Get, Query, Post, Body, Put, Param, Delete, Res, CacheKey, CacheTTL } from '@nestjs/common';
 import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 
@@ -16,6 +16,8 @@ export class CatsController {
   }
 
   @Get()
+  @CacheKey('cats/findAll')
+  @CacheTTL(5)
   async findAll() {
     console.log('global config', this.configService.get('global'))
     console.log('database config', this.configService.get('database'))
