@@ -16,7 +16,7 @@ export class CatsController {
   }
 
   @Get()
-  async findAll(): Promise<Cat[]> {
+  async findAll() {
     console.log('global config', this.configService.get('global'))
     console.log('database config', this.configService.get('database'))
 
