@@ -1,4 +1,5 @@
-import { Module } from '@nestjs/common';
+import { Module, CacheModule, CacheInterceptor } from '@nestjs/common';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
 import globalConfig from './config/global.config';
 import databaseConfig from './config/database.config';
@@ -15,9 +16,19 @@ import { CatsModule } from './cats/cats.module';
       load: [globalConfig, databaseConfig, cacheConfig],
       // isGlobal: true,
     }), 
+    CacheModule.register({
+      ttl: 5, // seconds
+      max: 10, // maximum number of items in cache
+    }),
     CatsModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService, 
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: CacheInterceptor,
+    }
+  ],
 })
 export class AppModule {}
