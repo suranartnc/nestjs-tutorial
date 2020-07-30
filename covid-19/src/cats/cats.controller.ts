@@ -17,11 +17,8 @@ export class CatsController {
 
   @Get()
   @CacheKey('cats/findAll')
-  @CacheTTL(5)
+  @CacheTTL(60)
   async findAll() {
-    console.log('global config', this.configService.get('global'))
-    console.log('database config', this.configService.get('database'))
-
     return this.catsService.findAll();
   } 
 }
