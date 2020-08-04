@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 import * as compression from 'compression';
 
-import { AppModule } from './modules/app/app.module';
+import { AppModule } from '@src/modules/app/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
