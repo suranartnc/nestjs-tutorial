@@ -5,16 +5,12 @@ import globalConfig from './config/global.config';
 import databaseConfig from './config/database.config';
 import cacheConfig from './config/cache.config';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-
-import { CatsModule } from './cats/cats.module';
+import { CatsModule } from '../cats/cats.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       load: [globalConfig, databaseConfig, cacheConfig],
-      // isGlobal: true,
     }),
     CacheModule.registerAsync({
       imports: [ConfigModule],
@@ -25,9 +21,7 @@ import { CatsModule } from './cats/cats.module';
     }),
     CatsModule,
   ],
-  controllers: [AppController],
   providers: [
-    AppService,
     {
       provide: APP_INTERCEPTOR,
       useClass: CacheInterceptor,
