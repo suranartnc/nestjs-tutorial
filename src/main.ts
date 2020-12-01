@@ -1,8 +1,15 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { ConfigService } from '@nestjs/config';
+import * as compression from 'compression';
+
+import { AppModule } from '@modules/app/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+  const configService = app.get(ConfigService);
+
+  app.use(compression());
+
+  await app.listen(configService.get('global.port'));
 }
 bootstrap();
