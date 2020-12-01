@@ -1,15 +1,33 @@
-version : '3'
+version: "3.5"
 
 services:
-  db:
-    image: mysql:latest
+  mysql:
+    image: mysql:5.7
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci
+    restart: always
+    ports:
+      - 3306:3306
     environment:
-      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: localhost_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    volumes:
+      - ./.docker/mysql_db:/var/lib/mysql
+    networks:
+      - localhost_net
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    links:
+      - mysql
     environment:
-      PMA_USER: root
-      PMA_PASSWORD: secret
-    ports:
-      - 8080:80
+      PMA_HOST: mysql
+    networks:
+      - "localhost_net"
+    ports: 
+      - "8080:80"
+
+networks:
+  localhost_net:
+    driver: "bridge"
