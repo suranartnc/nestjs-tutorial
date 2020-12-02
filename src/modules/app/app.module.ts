@@ -6,9 +6,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import globalConfig from '@modules/app/config/global.config';
 import databaseConfig from '@modules/app/config/database.config';
 import cacheConfig from '@modules/app/config/cache.config';
-import { CatsModule } from '@modules/cats/cats.module';
-import { UsersModule } from '@modules/users/users.module';
+import { CatModule } from '@modules/cats/cat.module';
+import { UserModule } from '@modules/users/user.module';
 import { User } from '@modules/users/user.entity';
+import { Photo } from '@modules/photos/photo.entity';
 
 @Module({
   imports: [
@@ -29,11 +30,11 @@ import { User } from '@modules/users/user.entity';
       username: 'root',
       password: 'root',
       database: 'localhost_db',
-      entities: [User],
+      entities: [User, Photo],
       synchronize: true, // Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
     }),
-    CatsModule,
-    UsersModule,
+    CatModule,
+    UserModule,
   ],
   providers: [
     {

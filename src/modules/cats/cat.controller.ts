@@ -11,24 +11,24 @@ import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 
 import { CreateCatDto } from './dto/create-cat.dto';
-import { CatsService } from './cats.service';
+import { CatService } from './cat.service';
 
 @Controller('cats')
-export class CatsController {
+export class CatController {
   constructor(
-    private catsService: CatsService,
+    private catService: CatService,
     private configService: ConfigService,
   ) {}
 
   @Post()
   async create(@Body() createCatDto: CreateCatDto, @Res() res: Response) {
-    this.catsService.create(createCatDto);
+    this.catService.create(createCatDto);
   }
 
   @Get()
   @CacheKey('cats/findAll')
   @CacheTTL(60)
   async findAll() {
-    return this.catsService.findAll();
+    return this.catService.findAll();
   }
 }

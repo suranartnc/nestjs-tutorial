@@ -4,7 +4,7 @@ import { Cat } from './interfaces/cat.interface';
 import * as parse from 'csv-parse/lib/sync';
 
 @Injectable()
-export class CatsService {
+export class CatService {
   constructor(private httpService: HttpService) {}
 
   private readonly cats: Cat[] = [];
