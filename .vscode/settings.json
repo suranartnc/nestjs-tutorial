@@ -2,4 +2,20 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
+  "files.exclude": {
+    ".docker": true,
+    ".eslintrc.js": true,
+    ".gitignore": true,
+    ".prettierrc": true,
+    ".vscode": true,
+    "dist": true,
+    "jsconfig.json": true,
+    "node_modules": true,
+    "README.md": true,
+    "yarn.lock": true
+  },
+  "search.exclude": {
+    "dist": true,
+    "node_modules": true
+  }
 }
