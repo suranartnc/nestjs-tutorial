@@ -14,8 +14,8 @@ export class UserService {
     return this.userRepository.findOne(id);
   }
 
-  findByName(firstName: string, lastName: string) {
-    return this.userRepository.findByName(firstName, lastName);
+  findByName(name: string) {
+    return this.userRepository.findByName(name);
   }
 
   async remove(id: string): Promise<void> {

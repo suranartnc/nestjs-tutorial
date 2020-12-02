@@ -1,4 +1,4 @@
-import { Controller, Get, Query, CacheKey, CacheTTL } from '@nestjs/common';
+import { Controller, Get, Query, CacheTTL } from '@nestjs/common';
 
 import { UserService } from './user.service';
 
@@ -7,17 +7,15 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Get()
-  @CacheKey('users/findAll')
-  @CacheTTL(60)
+  @CacheTTL(parseInt(process.env.CACHE_MEDIUM))
   async findAll() {
     return this.userService.findAll();
   }
 
   @Get('findByName')
-  @CacheKey('users/findByName')
-  @CacheTTL(60)
+  @CacheTTL(parseInt(process.env.CACHE_SHORT))
   async findByName(@Query() query) {
-    const { firstName, lastName } = query;
-    return this.userService.findByName(firstName, lastName);
+    const { name } = query;
+    return this.userService.findByName(name);
   }
 }

@@ -14,24 +14,29 @@ import { Photo } from '@modules/photos/photo.entity';
 @Module({
   imports: [
     ConfigModule.forRoot({
+      envFilePath: ['.env.local', '.env'],
       load: [globalConfig, databaseConfig, cacheConfig],
     }),
     CacheModule.registerAsync({
       imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
-        ttl: configService.get('cache.medium'),
+      useFactory: async (config: ConfigService) => ({
+        ttl: config.get('cache.medium'),
       }),
       inject: [ConfigService],
     }),
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'root',
-      database: 'localhost_db',
-      entities: [User, Photo],
-      synchronize: true, // Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (config: ConfigService) => ({
+        type: 'mysql',
+        host: config.get('database.host'),
+        port: config.get('database.port'),
+        username: config.get('database.username'),
+        password: config.get('database.password'),
+        database: config.get('database.db'),
+        entities: [User, Photo],
+        synchronize: true, // Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
+      }),
+      inject: [ConfigService],
     }),
     CatModule,
     UserModule,

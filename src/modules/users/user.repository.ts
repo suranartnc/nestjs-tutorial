@@ -3,10 +3,12 @@ import { User } from './user.entity';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
-  findByName(firstName: string, lastName: string) {
-    return this.createQueryBuilder('user')
-      .where('user.firstName = :firstName', { firstName })
-      .andWhere('user.lastName = :lastName', { lastName })
-      .getMany();
+  findByName(name: string) {
+    return (
+      this.createQueryBuilder('user')
+        .where('user.firstName = :name', { name })
+        // .andWhere('user.lastName = :lastName', { lastName })
+        .getMany()
+    );
   }
 }
