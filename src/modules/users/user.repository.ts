@@ -4,11 +4,9 @@ import { User } from './user.entity';
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
   findByName(name: string) {
-    return (
-      this.createQueryBuilder('user')
-        .where('user.firstName = :name', { name })
-        // .andWhere('user.lastName = :lastName', { lastName })
-        .getMany()
-    );
+    return this.createQueryBuilder('user')
+      .leftJoinAndSelect('user.photos', 'photo')
+      .where('user.firstName = :name', { name })
+      .getMany();
   }
 }
