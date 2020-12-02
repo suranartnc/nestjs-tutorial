@@ -1,7 +1,7 @@
 import { Injectable, HttpService } from '@nestjs/common';
 import { Cat } from './interfaces/cat.interface';
 
-const parse = require('csv-parse/lib/sync');
+import * as parse from 'csv-parse/lib/sync';
 
 @Injectable()
 export class CatsService {
