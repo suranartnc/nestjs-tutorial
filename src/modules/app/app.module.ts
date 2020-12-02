@@ -7,6 +7,8 @@ import globalConfig from '@modules/app/config/global.config';
 import databaseConfig from '@modules/app/config/database.config';
 import cacheConfig from '@modules/app/config/cache.config';
 import { CatsModule } from '@modules/cats/cats.module';
+import { UsersModule } from '@modules/users/users.module';
+import { User } from '@modules/users/user.entity';
 
 @Module({
   imports: [
@@ -27,10 +29,11 @@ import { CatsModule } from '@modules/cats/cats.module';
       username: 'root',
       password: 'root',
       database: 'localhost_db',
-      entities: [],
+      entities: [User],
       synchronize: true, // Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
     }),
     CatsModule,
+    UsersModule,
   ],
   providers: [
     {
