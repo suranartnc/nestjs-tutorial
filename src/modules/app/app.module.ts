@@ -14,7 +14,7 @@ import { Photo } from '@modules/photos/photo.entity';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: ['.env.local', '.env'],
+      envFilePath: ['.env.development', '.env.production'],
       load: [globalConfig, databaseConfig, cacheConfig],
     }),
     CacheModule.registerAsync({
