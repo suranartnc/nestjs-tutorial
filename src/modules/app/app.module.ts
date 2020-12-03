@@ -8,8 +8,6 @@ import databaseConfig from '@modules/app/config/database.config';
 import cacheConfig from '@modules/app/config/cache.config';
 import { CatModule } from '@modules/cats/cat.module';
 import { UserModule } from '@modules/users/user.module';
-import { User } from '@modules/users/user.entity';
-import { Photo } from '@modules/photos/photo.entity';
 
 @Module({
   imports: [
@@ -33,7 +31,7 @@ import { Photo } from '@modules/photos/photo.entity';
         username: config.get('database.username'),
         password: config.get('database.password'),
         database: config.get('database.db'),
-        entities: [User, Photo],
+        entities: [process.cwd() + '/dist/src/modules/**/*.entity{.ts,.js}'],
         synchronize: false,
       }),
       inject: [ConfigService],
