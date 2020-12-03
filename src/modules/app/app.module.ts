@@ -34,7 +34,7 @@ import { Photo } from '@modules/photos/photo.entity';
         password: config.get('database.password'),
         database: config.get('database.db'),
         entities: [User, Photo],
-        synchronize: true, // Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
+        synchronize: false,
       }),
       inject: [ConfigService],
     }),

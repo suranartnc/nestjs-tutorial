@@ -20,8 +20,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "ts-node node_modules/typeorm/cli.js  -f ormconfig.ts",
-    "migration:generate": "yarn run typeorm migration:generate -d src/migrations -n PostRefactoring",
-    "migration:create": "yarn run typeorm migration:create -d src/migrations -n PostRefactoring",
+    "migration:generate": "yarn run typeorm migration:generate -d src/migrations -n update-schema-",
+    "migration:run": "yarn run typeorm migration:run",
     "migration:revert": "yarn run typeorm migration:revert"
   },
   "dependencies": {

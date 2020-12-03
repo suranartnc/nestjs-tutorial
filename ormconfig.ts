@@ -15,6 +15,6 @@ module.exports = {
   username: process.env.DATABASE_USERNAME,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_DB,
-  entities: ['src/modules/**/*.entity{.ts,.js}'],
+  entities: ['dist/src/modules/**/*.entity{.ts,.js}'],
   migrations: ['src/migrations/*{.ts,.js}'],
 };
